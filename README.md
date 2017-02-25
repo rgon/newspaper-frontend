@@ -1,0 +1,1 @@
+<a href="https://rawgit.com/rgon/newspaper-frontend/master/squadra-demo.html">Fully-functioning demo.</a>
