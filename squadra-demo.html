@@ -36,7 +36,7 @@
             transform: translateZ(0);
         }
         .sidePane {
-            width: 400px;
+            min-width: 400px;
             background: #e6e6e6;
         }
         .mainPane {
@@ -86,7 +86,8 @@
             margin: 2px 0 2px 0;
             transition: .5s all;
         }
-        button:not(.noAnimation):hover {
+        button:hover {
+            color: black;
             background: none;
             border: 2px solid white;
         }
@@ -211,6 +212,26 @@
         }
         body.dark .sidePane .squadra {
             background: rgba(255, 255, 255, 0.14);
+        }
+        
+        body.marginalized .flexItem .topBar {
+            transform: translateY(10px);
+        }
+        body.notBackgroundShadow .flexItem .topBar > div,
+        body.notBackgroundShadow #previewBox .flexItem .bottomBar > span,
+        body.notBackgroundShadow #previewBox .flexItem .bottomBar > h3,
+        body.notBackgroundShadow #previewBox .flexItem .topBar > div {
+            text-shadow: 2px 2px 8px #333;
+            background: none;
+        }
+        body.backgroundOpacity .flexItem .topBar > div,
+        body.backgroundOpacity #previewBox .flexItem .bottomBar > span,
+        body.backgroundOpacity #previewBox .flexItem .bottomBar > h3,
+        body.backgroundOpacity #previewBox .flexItem .topBar > div {
+            text-shadow: none;
+            background: rgba(0, 0, 0, 0.5);
+            /*border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;*/
         }
     </style>
 </head>
@@ -564,8 +585,38 @@
                             <option value="1">DARK</option>
                         </select>
                     </form>
-                    <button onClick="$('.sidePane').toggle();">Toggle Sidebar</button>
-                    <button onClick="$('.centerView').toggleClass('fullWidth');$('.mainPane').toggleClass('fullWidth');">Full Width Mode</button>
+                    <br>
+                    
+                    <button onClick="$('.sidePane').toggle();
+                                     $(this).find('.toggleTxt').toggle();">Sidebar: 
+                        <span class="toggleTxt" style="display: inline-block;">Visible</span>
+                        <span class="toggleTxt" style="display: none;">Hidden</span>
+                    </button>
+                    
+                    <button onClick="$('.centerView').toggleClass('fullWidth');$('.mainPane').toggleClass('fullWidth');
+                                     
+                                     $(this).find('.toggleTxt').toggle();">Width: 
+                        <span class="toggleTxt" style="display: inline-block;">Restricted</span>
+                        <span class="toggleTxt" style="display: none;">Unrestricted</span>
+                    </button>
+                    
+                    <button onClick="$('body').toggleClass('backgroundOpacity');
+                                     $(this).find('.toggleTxt').toggle();">Text Background Mode: 
+                        <span class="toggleTxt" style="display: inline-block;">Full Opacity</span>
+                        <span class="toggleTxt" style="display: none;">50% Opacity</span>
+                    </button>
+                    
+                    <button onClick="$('body').toggleClass('notBackgroundShadow');
+                                     $(this).find('.toggleTxt').toggle();">Text Style: 
+                        <span class="toggleTxt" style="display: inline-block;">Background</span>
+                        <span class="toggleTxt" style="display: none;">Shadow</span>
+                    </button>
+                    
+                    <button onClick="$('body').toggleClass('marginalized');
+                                     $(this).find('.toggleTxt').toggle();">Card Top Bar: 
+                        <span class="toggleTxt" style="display: inline-block;">No Margin</span>
+                        <span class="toggleTxt" style="display: none;">10px Margin</span>
+                    </button>
                     
                     <div class="squadra">
                         <div class="squadra-pane-fixed" style="width: 50px;">
@@ -766,6 +817,8 @@
                             
                             box-sizing: border-box;
                             padding: 0 10px 20px 10px;
+                            padding: 0 20px 20px 20px;
+                            margin-bottom: 10px;
                             
                             color: white;
                             box-shadow: 0 -15px 30px -10px black inset;
