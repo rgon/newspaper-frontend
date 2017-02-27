@@ -509,13 +509,17 @@
                     opacity: 0;
                     transform: translateX(100%) translateY(0) translateZ(0);
                 }
-                10%, 90% {
+                /*10%, 90% {
                     opacity: 1;
                     transform: translateX(0%) translateY(0) translateZ(0);
                 }
                 to {
                     opacity: 0;
                     transform: translateX(-100%) translateY(0) translateZ(0);
+                }*/
+                10%, 100% {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
                 }
             }
             
@@ -542,39 +546,27 @@
                 }
             }
 
-
+            @keyframes slide-out {
+                from {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-100%) translateY(0) translateZ(0);
+                }
+            }
             .restart {
                 animation: none;
             }
             .slider {
+                background: black;
                 height: calc(100vw * 9 / 16);
                 max-height: calc(1280px * 9 / 16);
-                --slide-duration: 10s;
+                overflow: hidden !important;
             }
-            .slider.paused .slide,
-            .slider.paused .slide .bg,
-            .slider.paused .slide h3,
-            .slider.paused .slide p {
-                animation-play-state: paused;
-            }
+            
             .slide {
-                /* Overlap with the start/end animation (the slide animation starts at 10%)
-                and prevent it from fully being applied on the first slide, as it has no 10% delay and thus the delay should be 0% and not -20% as is the case with other slides
-                because (index = 0; 0/0 = 0; 0*10% = 0; delay = 0; instead of a negative delay),
-                a second condition is that the second slide should only have a -10% delay, when the third (index=2) should have a -20% one.
-                but 2/2; 3/3 still equals 1 so the value won't be modified. */
-                
-                /* Delay:
-                    slide duration * slide index (so the slides appear in order).
-                        If it's the first slide, index=0; delay= 0
-                        
-                        if it's the second slide, the delay should be Ans - 10% of the slide duration to join it (10% exit animation).
-                        if it's the >third slide, the delay should be Ans - 10% of the slide duration to join it (10% exit animation) - 10% to compensate for the previous duration.
-                */
-                --slide-animation-delay: calc((var(--slide-number) * var(--slide-duration)) - (var(--slide-duration) * 0.1 * var(--slide-number) / var(--slide-number)) - (var(--slide-duration) * 0.1 * (var(--slide-number) - 1)));
-                animation: new-slide var(--slide-duration) forwards;
-                animation-delay: var(--slide-animation-delay);
-                
                 opacity: 0;
                 overflow: hidden;
                 
@@ -582,6 +574,7 @@
                 left: 0;
                 position: absolute;
                 
+                height: 100%;
                 height: 100%;
                 width: 100%;
                 color: white;
@@ -605,12 +598,8 @@
                 background-position: center;
                 
                 overflow: visible;
-                transform: scale(1.2);
-                
-                animation: new-slide-bg  var(--slide-duration) forwards;
-                animation-delay: var(--slide-animation-delay);
-                
-                backface-visibility: hidden;
+                /* This value should be the same as the animation's last value */
+                /*transform: scale(1.2);*/
             }
             .slide .bottomText {
                 position: absolute;
@@ -624,23 +613,76 @@
             .slide .bottomText h3 {
                 font-size: 30px;
                 text-shadow: 2px 2px 8px black;
+            }
+            
+            .slide .bottomText p {
+                text-align: left;
+            }
+            
+            /*******/
+            
+            .slider {
+                --slide-duration: 10s;
+            }
+            
+            .slide.itcomes {
+                /* Overlap with the start/end animation (the slide animation starts at 10%)
+                and prevent it from fully being applied on the first slide, as it has no 10% delay and thus the delay should be 0% and not -20% as is the case with other slides
+                because (index = 0; 0/0 = 0; 0*10% = 0; delay = 0; instead of a negative delay),
+                a second condition is that the second slide should only have a -10% delay, when the third (index=2) should have a -20% one.
+                but 2/2; 3/3 still equals 1 so the value won't be modified. */
                 
-                animation: new-slide-title var(--slide-duration) forwards;
-                animation-delay: var(--slide-animation-delay);
+                /* Delay:
+                    slide duration * slide index (so the slides appear in order).
+                        If it's the first slide, index=0; delay= 0
+                        
+                        if it's the second slide, the delay should be Ans - 10% of the slide duration to join it (10% exit animation).
+                        if it's the >third slide, the delay should be Ans - 10% of the slide duration to join it (10% exit animation) - 10% to compensate for the previous duration.
+                */
+                --slide-animation-delay: calc((var(--slide-number) * var(--slide-duration)) - (var(--slide-duration) * 0.1 * var(--slide-number) / var(--slide-number)) - (var(--slide-duration) * 0.1 * (var(--slide-number) - 1)));
+                animation: new-slide var(--slide-duration) forwards;
+                /*animation-delay: var(--slide-animation-delay);*/
+            }
+            .slide.itcomes .bg {
+                animation: new-slide-bg  var(--slide-duration) forwards;
+                /*animation-delay: var(--slide-animation-delay);*/
                 
                 backface-visibility: hidden;
             }
-            .slide .bottomText p {
-                text-align: left;
-                
-                animation: new-slide-trim var(--slide-duration) forwards;
-                animation-delay: var(--slide-animation-delay);
+            .slide.itcomes .bottomText h3 {
+                animation: new-slide-title var(--slide-duration) forwards;
+                /*animation-delay: var(--slide-animation-delay);*/
                 
                 backface-visibility: hidden;
+            }
+            .slide.itcomes .bottomText p {
+                animation: new-slide-trim var(--slide-duration) forwards;
+                /*animation-delay: var(--slide-animation-delay);*/
+                
+                backface-visibility: hidden;
+            }
+            
+            
+            .slide.itgoes {
+                animation: slide-out 1s forwards;
+            }
+            
+            /* modifiers */
+            
+            .slider.paused .slide,
+            .slider.paused .slide .bg,
+            .slider.paused .slide h3,
+            .slider.paused .slide p {
+                animation-play-state: paused;
+            }
+            .slide.reverse:not(.itgoes) {
+                animation-direction: reverse;
+                animation-fill-mode: backwards;
             }
             /*************************************************/
             /*             Slide Index Numbers               */
             /*************************************************/
+            /*
             .slide:nth-child(1) {
                 --slide-number: 0;
             }
@@ -700,78 +742,65 @@
             }
             .slide:nth-child(20) {
                 --slide-number: 19;
-            }
+            }*/
         </style>
         
-        <div class="squadra-pane-relative slider" style="background: #333; overflow: hidden;" onClick="$(this).toggleClass('paused');">
-            <div class="slide">
+        <div class="squadra-pane-relative slider slider01" onClick="changeSlide($(this));">
+            <div class="slide itcomes">
                 <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&carousel);"></div>
                 <div class="container">
                     <div class="bottomText">
-                        <h3>Featured Content Carousel</h3>
+                        <h3>1 Featured Content Carousel</h3>
                         <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
                     </div>
                 </div>
             </div>
+            
             <div class="slide">
-                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&carousel1;"></div>
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&cearousel);"></div>
                 <div class="container">
                     <div class="bottomText">
-                        <h3>Featured Content Carousel</h3>
+                        <h3>2 Featured Content Carousel</h3>
                         <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
                     </div>
                 </div>
             </div>
+            
             <div class="slide">
-                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&carouse2l);"></div>
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&cartousel);"></div>
                 <div class="container">
                     <div class="bottomText">
-                        <h3>Featured Content Carousel</h3>
+                        <h3>3 Featured Content Carousel</h3>
                         <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
                     </div>
                 </div>
             </div>
+            
             <div class="slide">
-                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&carous3el;"></div>
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&caroyusel);"></div>
                 <div class="container">
                     <div class="bottomText">
-                        <h3>Featured Content Carousel</h3>
+                        <h3>4 Featured Content Carousel</h3>
                         <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
                     </div>
                 </div>
             </div>
+            
             <div class="slide">
-                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&carou4sel);"></div>
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&cagrousel);"></div>
                 <div class="container">
                     <div class="bottomText">
-                        <h3>Featured Content Carousel</h3>
+                        <h3>5 Featured Content Carousel</h3>
                         <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
                     </div>
                 </div>
             </div>
+            
             <div class="slide">
-                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&car5ousel;"></div>
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&cerarousel);"></div>
                 <div class="container">
                     <div class="bottomText">
-                        <h3>Featured Content Carousel</h3>
-                        <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&ca5rousel);"></div>
-                <div class="container">
-                    <div class="bottomText">
-                        <h3>Featured Content Carousel</h3>
-                        <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&ca8rousel;"></div>
-                <div class="container">
-                    <div class="bottomText">
-                        <h3>Featured Content Carousel</h3>
+                        <h3>6 Featured Content Carousel</h3>
                         <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
                     </div>
                 </div>
@@ -851,6 +880,19 @@
                     </form>
                     <br>
                     
+                    <button onClick="changeSlide($('.slider01'), true);">Prev Slide</button>
+                    <button onClick="toggleSlider($('.slider01'));">Pause Animation</button>
+                    <button onClick="changeSlide($('.slider01'));">Next Slide</button>
+                    <div>
+                        <span style="vertical-align: middle;">1s</span><input id="newSliderTime" type="range" min="1" max="15" style="vertical-align: middle;"><span style="vertical-align: middle;">10s</span>
+                        <button onClick="
+                                         $('.slider01')[0].style.setProperty('--slide-duration', $('#newSliderTime').val() + 's');
+                                         initializeSlider($('.slider01'), true);
+                                         changeSlide($('.slider01'), false);
+                                         changeSlide($('.slider01'), true);
+                                         ">Set Timing</button>
+                    </div>
+                    <br>
                     <button onClick="$('.sidePane').toggle();
                                      $(this).find('.toggleTxt').toggle();">Sidebar: 
                         <span class="toggleTxt" style="display: inline-block;">Visible</span>
@@ -1226,69 +1268,100 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!-- Slider -->
     <script>
-        var totalTime = 0;
-        var duration  = 10;
-        var restartTimeout;
-        
-        $(".slider").each(function() {
-            $(this).find("> .slide").each(function() {
-                $(this)[0].style.setProperty("--slide-number", $(this).index());
-            });
-            console.log($(this)[0].style.getPropertyValue("--slide-duration"));
+        //v2
+        function pauseSlider (slider) {
+            slider.addClass('paused');
+            clearInterval(intervalArray[searchInArray (sliderArray, slider)]);
+        }
+        function playSlider (slider) {
+            slider.removeClass('paused');
+            initializeSlider(slider);
+        }
+        function toggleSlider (slider) {
+            if(slider.hasClass("paused")) {
+                playSlider(slider);
+            } else {
+                pauseSlider(slider);
+            }
+        }
+        function changeSlide (slider, reverse) {
+            var currentSlide = slider.find(".itcomes");
             
-            totalTime = ($(this)[0].childElementCount) * duration - (duration*0.2);
-            console.log(totalTime);
+            var nextSlide;
+            if(reverse) {
+                var nextSlide;
+                if(currentSlide.is(".slide:first-child")) {
+                    nextSlide = slider.find("div:last-child");
+                } else {
+                    nextSlide = currentSlide.prev();
+                }
+            } else {
+                if(currentSlide.is(".slide:last-child")) {
+                    nextSlide = slider.find("div:first-child");
+                } else {
+                    nextSlide = currentSlide.next();
+                }
+            }
+
+            if(reverse) {
+                currentSlide.addClass("reverse");
+                nextSlide.addClass("reverse");
+            } else {
+                currentSlide.removeClass("reverse");
+                nextSlide.removeClass("reverse");
+            }
             
-            restartTimeout = setInterval(function() {
-                restart();
-            }, totalTime*1000);
-        });
-        function sliderNext() {
-            $(".slider > .slide").each(function() {
-                var currentDelay = parseInt($(this).css("animation-delay"));
-                $(this).css("animation-delay", (currentDelay-duration) + "s");
-                $(this).find(".bg").css("animation-delay", (currentDelay-duration) + "s");
-                $(this).find("p").css("animation-delay", (currentDelay-duration) + "s");
-                $(this).find("h3").css("animation-delay", (currentDelay-duration) + "s");
-                
-                totalTime = ($(this)[0].childElementCount-1) * duration - (duration*0.2);
-                clearInterval(restartTimeout);
-                restartTimeout = setInterval(function() {
-                    restart();
-                }, totalTime*1000);
-            });
+            currentSlide.removeClass("itcomes");
+            currentSlide.addClass("itgoes");
+            
+            nextSlide.removeClass("itgoes");
+            nextSlide.addClass("itcomes");
+            
+            //Restart the timer
+            initializeSlider(slider, true);
         }
         
-        function restart() {
-            $(".slider > .slide").each(function() {
-                var currentDelay = parseInt($(this).css("animation-delay"));
-                $(this).toggleClass("restart");
-                $(this).find(".bg").toggleClass("restart");
-                $(this).find("p").toggleClass("restart");
-                $(this).find("h3").toggleClass("restart");
-                
-                setTimeout(function() {
-                    $(this).toggleClass("restart");
-                    $(this).find(".bg").toggleClass("restart");
-                    $(this).find("p").toggleClass("restart");
-                    $(this).find("h3").toggleClass("restart");
-                }, 0);
-                
-                totalTime = ($(this)[0].childElementCount-1) * duration - (duration*0.2);
-                clearInterval(restartTimeout);
-                restartTimeout = setInterval(function() {
-                    restart();
-                }, totalTime*1000);
-            });
+        var intervalArray = [];
+        function initializeSlider(slider, restart) {
+            var slideDuration = window.getComputedStyle(slider[0]).getPropertyValue("--slide-duration");
+            if (slideDuration[slideDuration.length-1] == "s") {
+                slideDuration = parseFloat(slideDuration) * 1000;
+            } else {    //ms
+                slideDuration = parseFloat(slideDuration);
+            }
+
+            if (restart) {
+                clearInterval(intervalArray[searchInArray (sliderArray, slider)]);
+            }
+            //Get the current slider's ID, so we can assign it an interval
+            intervalArray[searchInArray (sliderArray, slider)] = setInterval(function() {
+                changeSlide(slider);
+            }, slideDuration);
+        }
+        
+        var sliderArray = [];   //Will contain all the sliders.
+        $(".slider").each(function() {
+            //Add the slider
+            sliderArray[sliderArray.length] = $(this);
+            //Add a respective element to the interval array so we can later access it by array[index]
+            intervalArray[intervalArray.length] = 0;
             
+            initializeSlider($(this));
+        });
+        
+        
+        //*****
+        
+        function searchInArray (array, elementToSearch) {
+            var index = 0;
             
-            totalTime = ($(".slider")[0].childElementCount) * duration - (duration*0.2);
-            console.log(totalTime);
-            
-            clearInterval(restartTimeout);
-            restartTimeout = setInterval(function() {
-                restart();
-            }, totalTime*1000);
+            for (var arrayElem in array) {
+                if (array[arrayElem] == elementToSearch) {
+                    index = arrayElem;
+                    break;
+                }
+            }
+            return index;
         }
     </script>
     
