@@ -1,1 +1,1 @@
-<a href="http://rawgit.com/rgon/newspaper-frontend/master/squadra-demo.html">Fully-functioning demo.</a>
+<a href="http://rawgit.com/rgon/newspaper-frontend/master/Advanced Squadra - Newspaper.html">Fully-functioning demo.</a>

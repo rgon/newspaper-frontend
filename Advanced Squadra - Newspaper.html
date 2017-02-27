@@ -545,6 +545,20 @@
                     filter: blur(0px);
                 }
             }
+            @keyframes new-slide-bgnew-slide-bg-mobile {
+                from {
+                    transform: scale(1.3) translateX(10%) translateY(0) translateZ(0);
+                    /*filter: blur(15px);*/
+                }
+                50% {
+                    transform: scale(1.3) translateX(-10%) translateY(0) translateZ(0);
+                    /*filter: blur(0px);*/
+                }
+                to {
+                    transform: scale(1) translateX(0%) translateY(0) translateZ(0);
+                    /*filter: blur(0px);*/
+                }
+            }
 
             @keyframes slide-out {
                 from {
@@ -745,6 +759,16 @@
             .slide:nth-child(20) {
                 --slide-number: 19;
             }*/
+            
+            /* Responsive: no blur as it takes a ton of resources to perform it */
+            @media (max-width: 720px) {
+                .slide.itcomes .bg {
+                    animation: new-slide-bg-mobile  var(--slide-duration) forwards;
+                    /*animation-delay: var(--slide-animation-delay);*/
+
+                    backface-visibility: hidden;
+                }
+            }
         </style>
         
         <div class="squadra-pane-relative slider slider01" onClick="changeSlide($(this));">
@@ -1286,25 +1310,29 @@
                 pauseSlider(slider);
             }
         }
-        function changeSlide (slider, reverse) {
+        function changeSlide (slider, reverse, goto) {
             var currentSlide = slider.find(".itcomes");
             
             var nextSlide;
-            if(reverse) {
-                var nextSlide;
-                if(currentSlide.is(".slide:first-child")) {
-                    nextSlide = slider.find("div:last-child");
-                } else {
-                    nextSlide = currentSlide.prev();
-                }
+            if (goto) {
+                nextSlide = goto;
             } else {
-                if(currentSlide.is(".slide:last-child")) {
-                    nextSlide = slider.find("div:first-child");
+                if(reverse) {
+                    var nextSlide;
+                    if(currentSlide.is(".slide:first-child")) {
+                        nextSlide = slider.find("div:last-child");
+                    } else {
+                        nextSlide = currentSlide.prev();
+                    }
                 } else {
-                    nextSlide = currentSlide.next();
+                    if(currentSlide.is(".slide:last-child")) {
+                        nextSlide = slider.find("div:first-child");
+                    } else {
+                        nextSlide = currentSlide.next();
+                    }
                 }
             }
-
+            
             if(reverse) {
                 currentSlide.addClass("reverse");
                 nextSlide.addClass("reverse");
