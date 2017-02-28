@@ -138,6 +138,9 @@
 			.desktopOnly {
 				display: none !important;
 			}
+            .fullHeightOnMobile {
+                height: calc(100vh - 50px) !important;
+            }
         }
 
         /* Interactivity */
@@ -570,6 +573,37 @@
                     transform: translateX(-100%) translateY(0) translateZ(0);
                 }
             }
+            
+            /* Reverse */
+            @keyframes slide-out-back {
+                from {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100%) translateY(0) translateZ(0);
+                }
+            }
+            @keyframes new-slide-back {
+                from {
+                    opacity: 0;
+                    transform: translateX(-100%) translateY(0) translateZ(0);
+                }
+                /*10%, 90% {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-100%) translateY(0) translateZ(0);
+                }*/
+                10%, 100% {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+            }
+            
             .restart {
                 animation: none;
             }
@@ -682,6 +716,12 @@
             .slide.itgoes {
                 animation: slide-out 1s forwards;
             }
+            .itcomes.reverse {
+                animation: new-slide-back 1s forwards;
+            }
+            .itgoes.reverse {
+                animation: slide-out-back 1s forwards;
+            }
             
             /* modifiers */
             
@@ -692,8 +732,8 @@
                 animation-play-state: paused;
             }
             .slide.reverse:not(.itgoes) {
-                animation-direction: reverse;
-                animation-fill-mode: backwards;
+                /*animation-direction: reverse;*/
+                /*animation-fill-mode: backwards;*/
             }
             /*************************************************/
             /*             Slide Index Numbers               */
@@ -771,7 +811,7 @@
             }
         </style>
         
-        <div class="squadra-pane-relative slider slider01" onClick="changeSlide($(this));">
+        <div class="squadra-pane-relative slider slider01 fullHeightOnMobile" onClick="changeSlide($(this));">
             <div class="slide itcomes">
                 <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&carousel);"></div>
                 <div class="container">
