@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Multi-Functional Link JS Test</title>
+</head>
+<body>
+	<a href="https://www.w3schools.com/images/colorpicker.gif" class="multifn">
+		<img src="https://unsplash.it/640/480/">
+	</a>
+	<iframe src="http://instructables.com" id="dankframe" style="height: 480px; width: 640px;"></iframe>
+	
+	<br><br>
+	<h3>Proposed link specification.</h3>
+	<h4>Article URL:</h4>
+	<li>rightstories.com/posts/LJfoikaDOInd8703</li>
+	<h4>Article AJAX Content URL:</h4>
+	<li>ajax.rightstories.com/posts/LJfoikaDOInd8703</li>
+	<br>
+	<p>When clicking a link, the javascript code will prepend the string "ajax." to the link's href attr (AKA it's URL) and then it will be loaded by an AJAX GET REQUEST onto the reader element.</p>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+		$(".multifn").on("click", function(event) {
+			var source = $(this).attr("href");
+			source = source.replace("images/colorpicker.gif", "");
+			$("#dankframe").attr("src", source);
+
+			console.log("STOPPED");
+			event.preventDefault();
+		});
+	</script>
+</body>
+</html>
