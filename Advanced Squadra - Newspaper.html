@@ -1440,7 +1440,11 @@
     <script>
         $("body .flexLayoutContainer").on("click", ".flexItem", function(event) {
             $('#previewBox').addClass('open');
-            $('#previewBox').find("> div > .container").html($(this).html());
+            
+            $.get("getpost?id=one", function(data) {
+                $('#previewBox').find("> div > .container").html(data);
+            });
+            $(this).html());
         });
         
         $("#previewBox").on("click", function(event) {
