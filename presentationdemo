@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="author" content="https://github.com/rgon">
+    <meta name="description" content="squadra examples">
+    
+    <title>squadra.css examples</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans|Source+Sans+Pro" rel="stylesheet">
+    
+    <!--<link href="../dist/squadra.css" rel="stylesheet">-->
+    <link href="https://rawgit.com/rgon/squadra/master/dist/squadra.css" rel="stylesheet">
+
+    <!-- flexApp Custom -->
+    <style>
+        .header {
+            height: 50px !important;
+            background: white;
+            color: #333;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .header h1 {
+            font-weight: normal;
+        }
+        .fixedHeader {
+            top: 0;
+            position: fixed !important;
+            z-index: 100;
+            
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        .sidePane {
+            min-width: 400px;
+            /* For testing purposes */
+            max-width: 400px;
+            background: #e6e6e6;
+        }
+        .mainPane {
+            background: white;
+        }
+
+        .mainPane.fullWidth .container {
+            max-width: 100% !important;
+        }
+        
+        .footer {
+            height: 100px;
+            background: white;
+            border-top: 1px solid #e2e2e2;
+        }
+        
+        /********************************************/
+        /* Styling, imported from a custom template */
+        body {
+            background: #f1f1f1;
+            /*font-family: Roboto,arial,sans-serif;*/
+            font-family: "Open Sans", sans-serif;
+            font-size: 13px;
+            
+            color: black;
+        }
+        .container {
+            position: relative;
+            display: block;
+            left: 0;
+            right: 0;
+            margin: auto;
+            max-width: 1280px;
+            box-sizing: border-box;
+            padding: 15px;
+            text-align: left;
+        }
+        button {
+            background: rgb(50,50,50);
+            border: none;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 20px 10px 20px;
+            box-sizing: border-box;
+            border: 2px solid transparent;
+            margin: 2px 0 2px 0;
+            transition: .5s all;
+        }
+        button:hover {
+            color: black;
+            background: none;
+            border: 2px solid white;
+        }
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+		hr {
+			opacity: 0.8;
+		}
+		
+		.float-right {
+            float: right;
+        }
+        .noPadding {
+            padding: 0;
+        }
+        .noMargin {
+            margin: 0;
+        }
+		.centerText {
+			text-align: center;
+		}
+        .bottom-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 10px;
+        }
+        .vertical-center {
+            display: block;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /********************************************/
+        
+		.mobileOnly {
+			display: none;
+		}
+        @media (max-width: 1048px) {
+			.mobileOnly {
+				display: inline-block;
+			}
+			.desktopOnly {
+				display: none !important;
+			}
+            .fullHeightOnMobile {
+                min-height: calc(100vh - 50px) !important;
+                max-height: calc(100vh - 50px) !important;
+            }
+        }
+
+        /* Interactivity */
+        
+        h2:not(.visibility),
+        h3:not(.visibility),
+        h4:not(.visibility),
+        h5:not(.visibility),
+        p:not(.visibility),
+        li:not(.visibility),
+        hr:not(.visibility),
+        button:not(.visibility) {
+            transition: .3s opacity;
+            opacity: var(--view-text);
+        }
+        
+        .windowHeight {
+            max-height: 100vh;
+            min-height: 100vh;
+        }
+        
+        body > .squadra {
+			/* Center, required for max-width */
+			position: relative;
+            display: block;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            /*max-width: 1280px;*/
+			
+			/* Other */
+            min-height: 100vh;
+        }
+        .centerView {
+			/* Center, required for max-width */
+			/*position: relative;*/
+            /*display: block;*/
+            /*left: 0;*/
+            /*right: 0;*/
+            margin: 0 auto;
+            min-width: 0 !important;
+            max-width: 1920px !important;
+        }
+        .centerView.fullWidth {
+            max-width: 100% !important;
+        }
+        
+        /* Open Sans Font Corrections */
+        body:not(.robotofont) .flexItem .bottomBar > p {
+            margin-top: -5px  !important;
+            height: 35px !important;
+        }
+        body:not(.robotofont) .flexItem .topBar > div > h4 {
+            margin-top: -5px  !important;
+        }
+        
+        
+        body.dark {
+            background: black;
+            color: grey;
+        }
+        body.dark .header {
+            background: #333;
+            color: white;
+            border-bottom: black;
+        }
+        body.dark .mainPane {
+            background: #212121;
+            color: white;
+        }
+        body.dark .sidePane {
+            background: #1c1c1c;
+            color: white;
+        }
+        body.dark .sidePane .squadra {
+            background: rgba(255, 255, 255, 0.14);
+        }
+        
+        body.marginalized .flexItem .topBar {
+            transform: translateY(10px);
+        }
+        body.notBackgroundShadow .flexItem .topBar > div,
+        body.notBackgroundShadow #previewBox .flexItem .bottomBar > span,
+        body.notBackgroundShadow #previewBox .flexItem .bottomBar > h3,
+        body.notBackgroundShadow #previewBox .flexItem .topBar > div {
+            text-shadow: 2px 2px 8px #333;
+            background: none;
+        }
+        body.backgroundOpacity .flexItem .topBar > div,
+        body.backgroundOpacity #previewBox .flexItem .bottomBar > span,
+        body.backgroundOpacity #previewBox .flexItem .bottomBar > h3,
+        body.backgroundOpacity #previewBox .flexItem .topBar > div {
+            text-shadow: none;
+            background: rgba(0, 0, 0, 0.5);
+            /*border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;*/
+        }
+    </style>
+</head>
+<body>
+    <style>
+        #previewBox {
+            position: fixed;
+            
+            top: 50px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            
+            z-index: 1000;
+            
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        #previewBox {
+            overflow: hidden;
+        }
+        /*  You could use #previewBox:before instead of .backdrop.
+            However, that doesn't receive any click callbacks.
+        */
+        #previewBox::before {
+            content: "";
+            position: absolute;
+            
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            
+            z-index: -1;
+            
+            background: white;
+            opacity: 0.5;
+        }
+        
+        /*Custom*/
+        #previewBox > div > .container {
+            float: right;
+            background: white;
+            min-height: 100%;
+            
+            width: 100%;
+            max-width: 720px;
+        }
+        #previewBox > div {
+            /*padding: 10%;*/
+            box-sizing: border-box;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+        }
+        
+        /*******************************************/
+        @keyframes box-container {
+            from {opacity: 0;}
+            to   {opacity: 1;}
+        }
+        @keyframes box-content {
+            from {transform: translateX(100%);}
+            to   {transform: translateX(0%);}
+        }
+        
+        
+        #previewBox {
+            display: none;
+        }
+        #previewBox.open {
+            display: inline-block;
+            animation: box-container 1s forwards;
+        }
+        #previewBox.open > div {
+            animation: box-content .5s forwards;
+        }
+        /**********************************************/
+        
+        #previewBox .flexItem {
+            min-height: 100%;
+            margin: 0;
+            /*max-width: 200px;*/
+
+            /* Background opacity */
+            background: black;
+
+            flex-grow: 1;
+            flex-shrink: 1;
+            /* This specifies the element's size before redistributing the grid */
+            /*flex-basis: 100px 100px;*/
+            /*background: red;*/
+        }
+        #previewBox .flexItem .bg {
+            height: 40%;
+            /*min-height: 300px;*/
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+
+            background-image: var(--var-bg);
+            background-size: cover;
+            background-position: center;
+        }
+        
+
+        #previewBox .flexItem > .icon {
+            display: none;
+        }
+        
+        #previewBox .flexItem .topBar {
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 43px;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+
+            text-align: center;
+
+            --shadow-size: 50px;
+            box-shadow: 0 calc(1 * var(--shadow-size) - 10px) var(--shadow-size) calc(-0.5 * var(--shadow-size) - 10px) black inset;
+        }
+        #previewBox .flexItem .topBar > img {
+            height: 100%;
+            display: inline-block;
+            float: left;
+
+            box-sizing: border-box;
+            /*border: 2px solid black;*/
+            --shadow-size: 50px;
+            box-shadow: 0 0 var(--shadow-size) 0 black;
+        }
+        #previewBox .flexItem .topBar > div {
+            padding: 0 3px;
+            height: 50px;
+            margin-top: -7px;
+            margin-bottom: -3px;
+            box-sizing: border-box;
+            white-space: nowrap;
+            display: inline-block;
+            float: right;
+            background: black;
+            color: white;
+            text-align: left;
+        }
+        #previewBox .flexItem .topBar > div > h4 {
+            vertical-align: baseline;
+            display: inline-block;
+            font-size: 50px;
+            margin: 0;
+        }
+        #previewBox .flexItem .topBar > div > span {
+            vertical-align: top;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        /* Re-sent */
+        #previewBox .flexItem .topBar > div:nth-child(2) {
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #previewBox .flexItem .bottomBar {
+            z-index: 1;
+            position: absolute;
+            top: 40%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            
+            width: 100%;
+            height: 100px;
+
+            box-sizing: border-box;
+            padding: 20px;
+
+            color: black;
+            box-shadow: 0 -15px 30px -10px black inset;
+            --shadow-size: 70px;
+            box-shadow: 0 calc(-1 * var(--shadow-size) + 10px) var(--shadow-size) calc(-0.5 * var(--shadow-size) - 10px) black inset;
+        }
+        #previewBox .flexItem .bottomBar > span {
+            color: #d8d8d8;
+            background: black;
+            position: absolute;
+            top: -75px;
+            transform: translateY(-100%);
+        }
+        #previewBox .flexItem .bottomBar > h3 {
+            position: absolute;
+            top: -40px;
+            transform: translateY(-100%);
+            /*text-transform: uppercase;*/
+            font-size: 20px;
+            margin: 8px 0;
+            
+            color: white;
+            background: black;
+            padding: 0 5px;
+            
+            /*white-space: nowrap;*/
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #previewBox .flexItem .bottomBar > p {
+            padding-top: 20px;
+        }
+    </style>
+    <div id="previewBox">
+        <div>
+            <div class="container flexItem">
+                <h1>&lt;This is the preview window.</h1>
+                <p>Yo</p>
+            </div>
+        </div>
+    </div>
+    <div class="squadra squadra-main squadra-vertical">
+        <div class="squadra-pane-fixed-noshrink
+                    container header">
+            <span>This is a spacer to fill out the fixed-position headers' space. And thus, it'll not be visible.</span>
+        </div>
+        
+        <div class="squadra-pane-fixed-noshrink
+                    container header fixedHeader">
+            <div class="vertical-center textAlignLeft" style="padding-left: 20px;
+            display: inline-block; float: left; height: 100%; opacity: .6;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Feedbin-Icon-menu.svg" class="vertical-center" style="height: 15px;">
+            </div>
+            <div class="vertical-center textAlignLeft" style="display: inline-block; float: left; height: 100%;">
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <!--<img src="https://www.youtube.com/yt/brand/media/image/YouTube-logo-full_color.png" class="vertical-center" style="height: 75px;">-->
+            </div>
+            <div class="vertical-center textAlignLeft" style="display: inline-block; float: left;">
+                <h1 style="margin: 0; display: inline-block; word-break: break-word; overflow-wrap: break-word; word-wrap: break-word; overflow: hidden; text-overflow: ellipsis;">Right<b>Stories</b><span class="desktopOnly"> - Squadra layout engine.</span></h1>
+            </div>
+            
+            
+            <div class="vertical-center textAlignLeft" style="padding-right: 20px;
+            display: inline-block; float: right; height: 100%; opacity: .6;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Generic-person.svg" class="vertical-center" style="height: 15px;">
+            </div>
+            <div class="vertical-center textAlignLeft" style="padding-right: 20px;
+            display: inline-block; float: right; height: 100%; opacity: .6;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Bell_icon.png" class="vertical-center" style="height: 18px;">
+            </div>
+            <div class="vertical-center textAlignLeft" style="padding-right: 20px;
+            display: inline-block; float: right; height: 100%; opacity: .6;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/OOjs_UI_icon_upload-ltr.svg" class="vertical-center" style="height: 20px;">
+            </div>
+        </div>
+        
+        <style>
+            /*******************************************/
+            @keyframes new-slide {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%) translateY(0) translateZ(0);
+                }
+                /*10%, 90% {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-100%) translateY(0) translateZ(0);
+                }*/
+                10%, 100% {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+            }
+            
+            @keyframes new-slide-title {
+                from {transform: translateX(10%) translateY(0) translateZ(0);}
+                to   {transform: translateX(-10%) translateY(0) translateZ(0);}
+            }
+            @keyframes new-slide-trim {
+                from {transform: translateX(5%) translateY(0) translateZ(0);}
+                to   {transform: translateX(-5%) translateY(0) translateZ(0);}
+            }
+            @keyframes new-slide-bg {
+                from {
+                    transform: scale(1.3) translateX(10%) translateY(0) translateZ(0);
+                    filter: blur(15px);
+                }
+                50% {
+                    transform: scale(1.3) translateX(-10%) translateY(0) translateZ(0);
+                    filter: blur(0px);
+                }
+                to {
+                    transform: scale(1) translateX(0%) translateY(0) translateZ(0);
+                    filter: blur(0px);
+                }
+            }
+            @keyframes new-slide-bg-mobile {
+                from {
+                    transform: scale(1.3) translateX(10%) translateY(0) translateZ(0);
+                    /*filter: blur(15px);*/
+                }
+                50% {
+                    transform: scale(1.3) translateX(-10%) translateY(0) translateZ(0);
+                    /*filter: blur(0px);*/
+                }
+                to {
+                    transform: scale(1) translateX(0%) translateY(0) translateZ(0);
+                    /*filter: blur(0px);*/
+                }
+            }
+
+            @keyframes slide-out {
+                from {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-100%) translateY(0) translateZ(0);
+                }
+            }
+            
+            /* Reverse */
+            @keyframes slide-out-back {
+                from {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100%) translateY(0) translateZ(0);
+                }
+            }
+            @keyframes new-slide-back {
+                from {
+                    opacity: 0;
+                    transform: translateX(-100%) translateY(0) translateZ(0);
+                }
+                /*10%, 90% {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-100%) translateY(0) translateZ(0);
+                }*/
+                10%, 100% {
+                    opacity: 1;
+                    transform: translateX(0%) translateY(0) translateZ(0);
+                }
+            }
+            
+            .restart {
+                animation: none;
+            }
+            .slider {
+                background: black;
+                height: calc(100vw * 9 / 16);
+                max-height: calc(1280px * 9 / 16);
+                overflow: hidden !important;
+            }
+            
+            .slide {
+                opacity: 0;
+                overflow: hidden;
+                
+                top: 0;
+                left: 0;
+                position: absolute;
+                
+                height: 100%;
+                height: 100%;
+                width: 100%;
+                color: white;
+            }
+            .slide .container {
+                height: 100%;
+                width: 100%;
+                margin: 0 auto;
+            }
+            .slide .bg {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0;
+                background-image: var(--var-bg);
+                background-size: cover;
+                background-position: center;
+                
+                overflow: visible;
+                /* This value should be the same as the animation's last value */
+                /*transform: scale(1.2);*/
+            }
+            .slide .bottomText {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                margin: 30px 50px;
+                text-align: left;
+                overflow: visible;
+                backface-visibility: hidden;
+            }
+            .slide .bottomText h3 {
+                font-size: 30px;
+                text-shadow: 2px 2px 8px black;
+            }
+            
+            .slide .bottomText p {
+                max-height: 20px;
+                overflow: hidden;
+                text-align: left;
+            }
+            
+            /*******/
+            
+            .slider {
+                --slide-duration: 10s;
+            }
+            
+            .slide.itcomes {
+                /* Overlap with the start/end animation (the slide animation starts at 10%)
+                and prevent it from fully being applied on the first slide, as it has no 10% delay and thus the delay should be 0% and not -20% as is the case with other slides
+                because (index = 0; 0/0 = 0; 0*10% = 0; delay = 0; instead of a negative delay),
+                a second condition is that the second slide should only have a -10% delay, when the third (index=2) should have a -20% one.
+                but 2/2; 3/3 still equals 1 so the value won't be modified. */
+                
+                /* Delay:
+                    slide duration * slide index (so the slides appear in order).
+                        If it's the first slide, index=0; delay= 0
+                        
+                        if it's the second slide, the delay should be Ans - 10% of the slide duration to join it (10% exit animation).
+                        if it's the >third slide, the delay should be Ans - 10% of the slide duration to join it (10% exit animation) - 10% to compensate for the previous duration.
+                */
+                --slide-animation-delay: calc((var(--slide-number) * var(--slide-duration)) - (var(--slide-duration) * 0.1 * var(--slide-number) / var(--slide-number)) - (var(--slide-duration) * 0.1 * (var(--slide-number) - 1)));
+                animation: new-slide var(--slide-duration) forwards;
+                /*animation-delay: var(--slide-animation-delay);*/
+            }
+            .slide.itcomes .bg {
+                animation: new-slide-bg  var(--slide-duration) forwards;
+                /*animation-delay: var(--slide-animation-delay);*/
+                
+                backface-visibility: hidden;
+            }
+            .slide.itcomes .bottomText h3 {
+                animation: new-slide-title var(--slide-duration) forwards;
+                /*animation-delay: var(--slide-animation-delay);*/
+                
+                backface-visibility: hidden;
+            }
+            .slide.itcomes .bottomText p {
+                animation: new-slide-trim var(--slide-duration) forwards;
+                /*animation-delay: var(--slide-animation-delay);*/
+                
+                backface-visibility: hidden;
+            }
+            
+            
+            .slide.itgoes {
+                animation: slide-out 1s forwards;
+            }
+            .itcomes.reverse {
+                animation: new-slide-back 1s forwards;
+            }
+            .itgoes.reverse {
+                animation: slide-out-back 1s forwards;
+            }
+            
+            /* modifiers */
+            
+            .slider.paused .slide,
+            .slider.paused .slide .bg,
+            .slider.paused .slide h3,
+            .slider.paused .slide p {
+                animation-play-state: paused;
+            }
+            .slide.reverse:not(.itgoes) {
+                /*animation-direction: reverse;*/
+                /*animation-fill-mode: backwards;*/
+            }
+            /*************************************************/
+            /*             Slide Index Numbers               */
+            /*************************************************/
+            /*
+            .slide:nth-child(1) {
+                --slide-number: 0;
+            }
+            .slide:nth-child(2) {
+                --slide-number: 1;
+            }
+            .slide:nth-child(3) {
+                --slide-number: 2;
+            }
+            .slide:nth-child(4) {
+                --slide-number: 3;
+            }
+            .slide:nth-child(5) {
+                --slide-number: 4;
+            }
+            .slide:nth-child(6) {
+                --slide-number: 5;
+            }
+            .slide:nth-child(7) {
+                --slide-number: 6;
+            }
+            .slide:nth-child(8) {
+                --slide-number: 7;
+            }
+            .slide:nth-child(9) {
+                --slide-number: 8;
+            }
+            .slide:nth-child(10) {
+                --slide-number: 9;
+            }
+            .slide:nth-child(11) {
+                --slide-number: 10;
+            }
+            .slide:nth-child(12) {
+                --slide-number: 11;
+            }
+            .slide:nth-child(13) {
+                --slide-number: 12;
+            }
+            .slide:nth-child(14) {
+                --slide-number: 13;
+            }
+            .slide:nth-child(15) {
+                --slide-number: 14;
+            }
+            .slide:nth-child(16) {
+                --slide-number: 15;
+            }
+            .slide:nth-child(17) {
+                --slide-number: 16;
+            }
+            .slide:nth-child(18) {
+                --slide-number: 17;
+            }
+            .slide:nth-child(19) {
+                --slide-number: 18;
+            }
+            .slide:nth-child(20) {
+                --slide-number: 19;
+            }*/
+            
+            /* Responsive: no blur as it takes a ton of resources to perform it */
+            @media (max-width: 720px) {
+                .slide.itcomes .bg {
+                    animation: new-slide-bg-mobile var(--slide-duration) forwards;
+                    /*animation-delay: var(--slide-animation-delay);*/
+
+                    backface-visibility: hidden;
+                }
+            }
+        </style>
+        
+        <div class="squadra-pane-relative slider slider01 fullHeightOnMobile" onClick="changeSlide($(this));">
+            <div class="slide itcomes">
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&carousel);"></div>
+                <div class="container">
+                    <div class="bottomText">
+                        <h3>1 Featured Content Carousel</h3>
+                        <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide">
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&cearousel);"></div>
+                <div class="container">
+                    <div class="bottomText">
+                        <h3>2 Featured Content Carousel</h3>
+                        <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide">
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&cartousel);"></div>
+                <div class="container">
+                    <div class="bottomText">
+                        <h3>3 Featured Content Carousel</h3>
+                        <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide">
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&caroyusel);"></div>
+                <div class="container">
+                    <div class="bottomText">
+                        <h3>4 Featured Content Carousel</h3>
+                        <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide">
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&cagrousel);"></div>
+                <div class="container">
+                    <div class="bottomText">
+                        <h3>5 Featured Content Carousel</h3>
+                        <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide">
+                <div class="bg" style="--var-bg: url(https://unsplash.it/1920/1080/?random&cerarousel);"></div>
+                <div class="container">
+                    <div class="bottomText">
+                        <h3>6 Featured Content Carousel</h3>
+                        <p>Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. Lorem ipsum dolor sit amet consecteur edipiscit elit. </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="squadra-pane-fixed
+                    container mobileOnly">
+            <span>The sidebar collapses in mobile viewports.</span>
+            <h5>My Subscriptions:</h5>
+            
+            <style>
+                /*
+                #twoRowChildren > div > .squadra {
+                    width: 50% !important; float: left;
+                    display: inline-flex;
+                }*/
+            </style>
+            <div id="twoRowChildren">
+                <div class="insertText-block2"></div>
+            </div>
+        </div>
+
+        <div class="squadra-pane-relative
+                    squadra
+                    centerView">
+            <div class="squadra-pane-relative mainPane">
+                <div class="squadra-pane-relative
+                            container
+                            " style="overflow: auto">
+                    <form style="display: inline-block;">
+                        <span>Current Font:</span>
+                        <select onchange="
+                                        switch(this.selectedIndex) {
+                                            case 0:
+                                                $('body').css('font-family', 'Roboto');
+                                                $('body').addClass('robotofont');
+                                                break;
+                                            case 1:
+                                                $('body').css('font-family', 'Open Sans');
+                                                $('body').removeClass('robotofont');
+                                                break;
+                                            case 2:
+                                                $('body').css('font-family', 'Source Sans Pro');
+                                                $('body').removeClass('robotofont');
+                                                break;
+                                        }">
+                            <option value="0">Roboto</option>
+                            <option value="1" selected>Open Sans</option> 
+                            <option value="2">Source Sans Pro</option>
+                        </select>
+                    </form>
+                    <form style="display: inline-block;">
+                        <span>Box Shadow:</span>
+                        <select onchange="
+                                        if(this.selectedIndex == 1) {
+                                            $('.flexLayoutContainer .flexItem > .topBar, .flexLayoutContainer .flexItem > .bottomBar').removeClass('noShadow');
+                                        } else {
+                                            $('.flexLayoutContainer .flexItem > .topBar, .flexLayoutContainer .flexItem > .bottomBar').addClass('noShadow');
+                                        }">
+                            <option value="0" selected>NO</option>
+                            <option value="1">YES</option>
+                        </select>
+                    </form>
+                    <form style="display: inline-block;">
+                        <span>Style:</span>
+                        <select onchange="
+                                        if(this.selectedIndex == 1) {
+                                            $('body').addClass('dark');
+                                        } else {
+                                            $('body').removeClass('dark');
+                                        }">
+                            <option value="0" selected>LIGHT</option>
+                            <option value="1">DARK</option>
+                        </select>
+                    </form>
+                    <br>
+                    
+                    <button onClick="changeSlide($('.slider01'), true);">Prev Slide</button>
+                    <button onClick="toggleSlider($('.slider01'));">Pause Animation</button>
+                    <button onClick="changeSlide($('.slider01'));">Next Slide</button>
+                    <div>
+                        <span style="vertical-align: middle;">1s</span><input id="newSliderTime" type="range" min="1" max="15" style="vertical-align: middle;"><span style="vertical-align: middle;">10s</span>
+                        <button onClick="
+                                         $('.slider01')[0].style.setProperty('--slide-duration', $('#newSliderTime').val() + 's');
+                                         initializeSlider($('.slider01'), true);
+                                         changeSlide($('.slider01'), false);
+                                         changeSlide($('.slider01'), true);
+                                         ">Set Timing</button>
+                    </div>
+                    <br>
+                    <button onClick="$('.sidePane').toggle();
+                                     $(this).find('.toggleTxt').toggle();">Sidebar: 
+                        <span class="toggleTxt" style="display: inline-block;">Visible</span>
+                        <span class="toggleTxt" style="display: none;">Hidden</span>
+                    </button>
+                    
+                    <button onClick="$('.centerView').toggleClass('fullWidth');$('.mainPane').toggleClass('fullWidth');
+                                     
+                                     $(this).find('.toggleTxt').toggle();">Width: 
+                        <span class="toggleTxt" style="display: inline-block;">Restricted</span>
+                        <span class="toggleTxt" style="display: none;">Unrestricted</span>
+                    </button>
+                    
+                    <button onClick="$('body').toggleClass('backgroundOpacity');
+                                     $(this).find('.toggleTxt').toggle();">Text Background Mode: 
+                        <span class="toggleTxt" style="display: inline-block;">Full Opacity</span>
+                        <span class="toggleTxt" style="display: none;">50% Opacity</span>
+                    </button>
+                    
+                    <button onClick="$('body').toggleClass('notBackgroundShadow');
+                                     $(this).find('.toggleTxt').toggle();">Text Style: 
+                        <span class="toggleTxt" style="display: inline-block;">Background</span>
+                        <span class="toggleTxt" style="display: none;">Shadow</span>
+                    </button>
+                    
+                    <button onClick="$('body').toggleClass('marginalized');
+                                     $(this).find('.toggleTxt').toggle();">Card Top Bar: 
+                        <span class="toggleTxt" style="display: inline-block;">No Margin</span>
+                        <span class="toggleTxt" style="display: none;">10px Margin</span>
+                    </button>
+                    
+                    <div class="squadra">
+                        <div class="squadra-pane-fixed" style="width: 50px;">
+                            <div class="vertical-center textAlignLeft" style="opacity: .6;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Generic-person.svg" style="height: 50px; width; 100%;">
+                            </div>
+                        </div>
+                        <div class="squadra-pane-relative
+                                    container">
+                            <h3 class="noMargin">Channel: <a href="https://github.com/rgon">https://github.com/rgon</a></h3>
+                            <p>Number of subscribers: <b>Hidden</b></p>
+                        </div>
+                        <div class="squadra-pane-relative">
+                            <div class="vertical-center container" style="text-align: right;">
+                                <h3>500 views</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="opacity: 0.4;"><br>
+                    
+                    <style>
+                        .flexLayoutContainer {
+                            width: 100%;
+                            height: 100%;
+
+                            position: relative;
+                            display: inline-flex;
+
+                            flex-direction: row;
+
+                            /* Horizontal Domain */
+                            flex-wrap: wrap;
+                            justify-content: space-between; /* Like space-around except it doesn't add space at the sides */
+                            /* Mobile (?)
+                            justify-content: center;
+                            */
+                            /* Vertical Domain */
+                            align-items: flex-start;
+                            align-content: flex-start;
+                        }
+                        .flexLayoutContainer .flexItem {
+                            position: relative;
+                            overflow: hidden;
+                            min-height: 300px;
+                            min-width: 250px;
+                            max-width: 350px;
+
+                            margin: 10px;
+                            /*max-width: 200px;*/
+
+                            /* Background opacity */
+                            background: black;
+                            
+                            flex-grow: 1;
+                            flex-shrink: 1;
+                            /* This specifies the element's size before redistributing the grid */
+                            /*flex-basis: 100px 100px;*/
+                            /*background: red;*/
+                        }
+                        .flexLayoutContainer .flexItem .bg {
+                            height: 100%;
+                            width: 100%;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            margin: 0;
+                            
+                            background-image: var(--var-bg);
+                            background-size: cover;
+                            background-position: center;
+                        }
+                        .flexLayoutContainer .flexItem.large {
+                            /* It grows 5x as much */
+                            flex-grow: 1;
+                            min-width: 550px;
+                            max-width: none;
+
+                            /*background: blue;*/
+                        }
+
+                        @media (max-width: 580px) {
+                            .flexLayoutContainer {
+                                justify-content: center;
+                            }
+                            .flexLayoutContainer .flexItem.large {
+                                min-width: 0 !important;
+                                width: 100% !important;
+                            }
+                            
+                            .breakPoint1 {
+                                display: none !important;
+                            }
+                        }
+                        
+                        .flexLayoutContainer .flexItem.fullWidth {
+                            min-width: 100%;
+                            min-height: auto;
+
+                            background: black;
+                            height: auto;
+                        }
+
+                        .flexLayoutContainer .flexItem > .icon {
+                            height: 100%;
+                            width: 100%;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            
+                            text-align: center;
+                            
+                            filter: saturate(0);
+                        }
+                        .flexLayoutContainer .flexItem > .icon img {
+                            height: 100px;
+                            width: 100px;
+                            display: inline-block;
+                            opacity: .5;
+                        }
+                        .flexLayoutContainer .flexItem .topBar {
+                            z-index: 1;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            
+                            height: 43px;
+                            width: 100%;
+                            padding: 0 20px;
+                            box-sizing: border-box;
+                            
+                            text-align: center;
+                            
+                            --shadow-size: 50px;
+                            box-shadow: 0 calc(1 * var(--shadow-size) - 10px) var(--shadow-size) calc(-0.5 * var(--shadow-size) - 10px) black inset;
+                        }
+                        .flexLayoutContainer .flexItem .topBar > img {
+                            height: 100%;
+                            display: inline-block;
+                            float: left;
+                            
+                            box-sizing: border-box;
+                            /*border: 2px solid black;*/
+                            --shadow-size: 50px;
+                            box-shadow: 0 0 var(--shadow-size) 0 black;
+                        }
+                        .flexLayoutContainer .flexItem .topBar > div {
+                            padding: 0 3px;
+                            height: 50px;
+                            margin-top: -7px;
+                            margin-bottom: -3px;
+                            box-sizing: border-box;
+                            white-space: nowrap;
+                            display: inline-block;
+                            float: right;
+                            background: black;
+                            color: white;
+                            text-align: left;
+                        }
+                        .flexLayoutContainer .flexItem .topBar > div > h4 {
+                            vertical-align: baseline;
+                            display: inline-block;
+                            font-size: 50px;
+                            margin: 0;
+                        }
+                        .flexLayoutContainer .flexItem .topBar > div > span {
+                            vertical-align: top;
+                            text-transform: uppercase;
+                            font-weight: bold;
+                            display: inline-block;
+                        }
+                        
+                        /* Re-sent */
+                        .flexLayoutContainer .flexItem .topBar > div:nth-child(2) {
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            margin-left: 50%;
+                            transform: translateX(-50%);
+                        }
+                        .flexLayoutContainer .flexItem:not(.large) .topBar > div:nth-child(2) {
+                            display: none;
+                        }
+                        
+                        .flexLayoutContainer .flexItem .bottomBar {
+                            z-index: 1;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            
+                            width: 100%;
+                            height: 100px;
+                            
+                            box-sizing: border-box;
+                            padding: 0 10px 20px 10px;
+                            padding: 0 20px 20px 20px;
+                            margin-bottom: 10px;
+                            
+                            color: white;
+                            box-shadow: 0 -15px 30px -10px black inset;
+                            --shadow-size: 70px;
+                            box-shadow: 0 calc(-1 * var(--shadow-size) + 10px) var(--shadow-size) calc(-0.5 * var(--shadow-size) - 10px) black inset;
+                        }
+                        .flexLayoutContainer .flexItem .bottomBar > span {
+                            color: #d8d8d8;
+                        }
+                        .flexLayoutContainer .flexItem .bottomBar > h3 {
+                            /*text-transform: uppercase;*/
+                            font-size: 20px;
+                            margin: 8px 0;
+                            
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        .flexLayoutContainer .flexItem .bottomBar > p {
+                            overflow: hidden;
+                            height: 30px;
+                        }
+                        
+                        /********************************************/
+                        .flexLayoutContainer .flexItem > .icon {
+                            opacity: 0;
+                            transition: 1.5s opacity;
+                        }
+                        .flexLayoutContainer .flexItem:hover > .icon {
+                            opacity: .8;
+                        }
+                        .flexLayoutContainer .flexItem .topBar > div, .flexLayoutContainer .flexItem .topBar > img {
+                            /* background may be disabled */
+                            transition: .9s transform, .9s background;
+                            
+                            -webkit-backface-visibility: hidden;
+                            backface-visibility: hidden;
+                        }
+                        .flexLayoutContainer .flexItem:hover .topBar > div, .flexLayoutContainer .flexItem:hover .topBar > img {
+                            transform: translateY(10px);
+                            background: transparent;
+                        }
+                        .flexLayoutContainer .flexItem:hover .topBar > div:nth-child(2) {
+                            transform: translateX(-50%) translateY(10px);
+                        }
+                        .flexLayoutContainer .flexItem > .bg {
+                            opacity: .9;
+                            transition: .5s filter, .5s transform, .5s opacity;
+                        }
+                        .flexLayoutContainer .flexItem:hover > .bg {
+                            transform: scale(1.1);
+                            filter: blur(5px);
+                            opacity: 0.8;
+                            
+                            -webkit-backface-visibility: hidden;
+                            backface-visibility: hidden;
+                        }
+                        .flexLayoutContainer .flexItem > .topBar, .flexLayoutContainer .flexItem > .bottomBar {
+                            transition: 1s box-shadow;
+                        }
+                        .flexLayoutContainer .flexItem:hover > .topBar, .flexLayoutContainer .flexItem:hover > .bottomBar,
+                        .noShadow {
+                            box-shadow: none !important;
+                        }
+                        /********************************************/
+
+                        .flexLayoutContainer .flexItem.relativeSizes {
+                            margin: 0;
+                            min-width: calc(100% / 3);
+
+                            flex-shrink: 1;
+                            flex-grow: 1;
+                            background: green;
+                        }
+
+                        .flexLayoutContainer .flexItem.fullProportional {
+                            width: calc(100% / var(--dasLayout-columns)) !important;
+                            min-width: 400px;
+                            max-width: none;
+                            /*max-width: 600px;*/
+
+                            max-height: none;
+
+                            height: auto;
+                            flex-grow: 1;
+                            margin: 0;
+
+                            border: 15px solid white;
+                            box-sizing: border-box;
+                        }
+                        .fitheight {
+                        }
+                    </style>
+                    
+                    <div class="flexLayoutContainer insertText-block1"></div>
+                </div>
+            </div>
+            
+            <div class="squadra-pane-fixed
+                        sidePane desktopOnly">
+                <div class="squadra-pane-relative
+                            container">
+                    <div style="background: rgb(30,30,30);
+                                height: 250px;
+                                text-align: center;
+                                color: grey;
+                                ">
+                        <div class="vertical-center">
+                            <h3 class="noMargin">Ad Container</h3>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    
+                    <h3>My Subscriptions:</h3>
+                    
+                    <!--<div class="squadra" style="background: rgba(255,255,255,0.35); margin: 10px 0;">
+                        <div class="squadra-pane-fixed container centerText" style="margin-left: 10px; width: 125px; background: #c7c7c7;">
+                            <h4 style="vertical-center">Thumbail</h4>
+                        </div>
+                        <div class="squadra-pane-relative container noMargin" style="padding-top: 0; padding-bottom: 0;">
+                            <h4>Video Title</h4>
+                            <p>Channel <br> 1337 Views</p>
+                        </div>
+                    </div>-->
+                    
+                    <div class="insertText-block2"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="squadra-pane-fixed-noshrink
+                    footer">
+            <div class="textAlignLeft container" style="max-width: none; height: 100%; margin: 0; padding: 20px;">
+                <p class="vertical-center noMargin">Sticky Footer, even when the content's smaller than the window.</p>
+                <a class="visibility bottom-right" href="https://github.com/rgon/squadra">https://github.com/rgon/squadra</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Slider -->
+    <script>
+        //v2
+        function pauseSlider (slider) {
+            slider.addClass('paused');
+            clearInterval(intervalArray[searchInArray (sliderArray, slider)]);
+        }
+        function playSlider (slider) {
+            slider.removeClass('paused');
+            initializeSlider(slider);
+        }
+        function toggleSlider (slider) {
+            if(slider.hasClass("paused")) {
+                playSlider(slider);
+            } else {
+                pauseSlider(slider);
+            }
+        }
+        function changeSlide (slider, reverse, goto) {
+            var currentSlide = slider.find(".itcomes");
+            
+            var nextSlide;
+            if (goto) {
+                nextSlide = goto;
+            } else {
+                if(reverse) {
+                    var nextSlide;
+                    if(currentSlide.is(".slide:first-child")) {
+                        nextSlide = slider.find("div:last-child");
+                    } else {
+                        nextSlide = currentSlide.prev();
+                    }
+                } else {
+                    if(currentSlide.is(".slide:last-child")) {
+                        nextSlide = slider.find("div:first-child");
+                    } else {
+                        nextSlide = currentSlide.next();
+                    }
+                }
+            }
+            
+            if(reverse) {
+                currentSlide.addClass("reverse");
+                nextSlide.addClass("reverse");
+            } else {
+                currentSlide.removeClass("reverse");
+                nextSlide.removeClass("reverse");
+            }
+            
+            currentSlide.removeClass("itcomes");
+            currentSlide.addClass("itgoes");
+            
+            nextSlide.removeClass("itgoes");
+            nextSlide.addClass("itcomes");
+            
+            //Restart the timer
+            initializeSlider(slider, true);
+        }
+        
+        var intervalArray = [];
+        function initializeSlider(slider, restart) {
+            var slideDuration = window.getComputedStyle(slider[0]).getPropertyValue("--slide-duration");
+            if (slideDuration[slideDuration.length-1] == "s") {
+                slideDuration = parseFloat(slideDuration) * 1000;
+            } else {    //ms
+                slideDuration = parseFloat(slideDuration);
+            }
+
+            if (restart) {
+                clearInterval(intervalArray[searchInArray (sliderArray, slider)]);
+            }
+            //Get the current slider's ID, so we can assign it an interval
+            intervalArray[searchInArray (sliderArray, slider)] = setInterval(function() {
+                changeSlide(slider);
+            }, slideDuration);
+        }
+        
+        var sliderArray = [];   //Will contain all the sliders.
+        $(".slider").each(function() {
+            //Add the slider
+            sliderArray[sliderArray.length] = $(this);
+            //Add a respective element to the interval array so we can later access it by array[index]
+            intervalArray[intervalArray.length] = 0;
+            
+            initializeSlider($(this));
+        });
+        
+        
+        //*****
+        
+        function searchInArray (array, elementToSearch) {
+            var index = 0;
+            
+            for (var arrayElem in array) {
+                if (array[arrayElem] == elementToSearch) {
+                    index = arrayElem;
+                    break;
+                }
+            }
+            return index;
+        }
+    </script>
+    
+    <!-- Preview Pane -->
+    <script>
+        $("body .flexLayoutContainer").on("click", ".flexItem", function(event) {
+            $('#previewBox').addClass('open');
+            
+            $.get("getpost?id=one", function(data) {
+                $('#previewBox').find("> div > .container").html(data);
+            });
+            $(this).html());
+        });
+        
+        $("#previewBox").on("click", function(event) {
+            $(this).removeClass("open");
+        });
+    </script>
+    <!-- Block Loading -->
+    <script>
+        for (var i = 0; i < 8; i++) {
+            var desktopOnlyClass = "";
+            if(i>4) {
+                desktopOnlyClass = " desktopOnly"
+            }
+            
+            var userInfo = {
+                name: "The NY Times",
+                reading: 100,
+                logo: "http://tanakamusic.com/wp-content/uploads/2012/04/TheTimes.gif"
+            }
+            if (i%2) {
+                userInfo = {
+                    name: "The Verge",
+                    reading: 231,
+                    logo: "http://blog.ourcrowd.com/wp-content/uploads/2016/03/The-Verge.png"
+                }
+            } else if (i%3) {
+                userInfo = {
+                    name: "Vox",
+                    reading: 121,
+                    logo: "http://cdn.newsbusters.org/images/2014/August/vox_0.jpg"
+                }
+            } else if (i%5) {
+                userInfo = {
+                    name: "Gizmodo",
+                    reading: 35,
+                    logo: "https://i.kinja-img.com/gawker-media/image/upload/s--fpmjJEQ---/c_scale,fl_progressive,q_80,w_800/198a63uuoqps0png.png"
+                }
+            }
+            
+            $(".insertText-block2").append(
+                '<div class="squadra' + desktopOnlyClass + '" style="background: rgba(255,255,255,0.35); margin: 10px 0;">\
+                            <div class="squadra-pane-fixed container centerText" style="margin-left: 10px; width: 125px; height: 100%;background-size: cover; background-position: center; background-image: url(' + userInfo.logo + ');">\
+                                <h4 style="vertical-center">&nbsp;</h4>\
+                            </div>\
+                            <div class="squadra-pane-relative container noMargin" style="padding-top: 0; padding-bottom: 0;">\
+                                <h4>' + userInfo.name + '</h4>\
+                                <p>News Company <br><b>' + userInfo.reading + '</b> reading</p>\
+                            </div>\
+                        </div>');
+        }
+        $(".insertText-block2").append(
+            '<div class="squadra' + desktopOnlyClass + '" style="background: rgba(255,255,255,0.35); margin: 10px 0;">\
+                        <div class="squadra-pane-relative container noMargin" style="padding-top: 0; padding-bottom: 0;">\
+                            <h4>You&#39;re following 7 people.</h4>\
+                            <p class="centerText"><a href="#">Load More</a></p>\
+                        </div>\
+                    </div>');
+        
+        
+        //Create News Blocks
+        function returnBlock(element, isLarge, heading, content, i, y) {
+            //var thumbIMG = "https://upload.wikimedia.org/wikipedia/commons/f/f0/Google_Earth_Icon.png";
+            var categoryIMG = "https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg";
+            
+            var largeClass = "";
+            if(isLarge) {
+                largeClass = " large";
+                categoryIMG = "https://upload.wikimedia.org/wikipedia/commons/4/46/Generic_Feed-icon.svg";
+            }
+            
+            //<img src="https://unsplash.it/50/50/?random&' + i + ',' + y + '">\
+            var returnValue = 
+                '<div class="flexItem' + largeClass + '">\
+                    <div class="bg" style="--var-bg: url(https://unsplash.it/640/480/?random&' + i + ',' + y + ');"></div>\
+                    <div class="topBar noShadow">\
+                        <img src="https://api.adorable.io/avatars/50/abott@adorable.png&' + i + ',' + y + '">\
+                        <div>\
+                            <h4>' + ((i+1)*(y+2)) + 'k</h4>\
+                            <span class="vertical-center">people&#39;ve <br>reposted</span>\
+                        </div>\
+                        <div>\
+                            <h4>' + ((i+1)*(y+1)) + '</h4>\
+                            <span class="vertical-center">hours <br>ago</span>\
+                        </div>\
+                    </div>\
+                    <div class="icon">\
+                        <img class="vertical-center" src="' + categoryIMG + '">\
+                    </div>\
+                    <div class="bottomBar noShadow">\
+                        <span>6 Minutes</span>\
+                        <h3>' + heading +'</h3>\
+                        <p>' + content + '</p>\
+                    </div\
+                </div>';
+            
+            element.append(returnValue);
+        }
+        
+        
+        
+        /* Asynchronous Content Load */
+        var hasLoaded = false;
+        var iterationCount = 10;
+        var availableHeadings;
+        $.getJSON("http://www.randomtext.me/api/gibberish/p-" + iterationCount + "/1-8", function(data) {
+            availableHeadings = data.text_out
+                .split("</p>").join("")
+                .split("<p>")
+                .slice(1, -1);
+            if(hasLoaded) {
+                loadContent();
+            } else {
+                //Wait for the other one and allow it to load the content.
+                hasLoaded = true;
+            }
+        });
+        
+        var availableBodies;
+        $.getJSON("http://www.randomtext.me/api/gibberish/p-" + iterationCount + "/25-45", function(data) {
+            availableBodies = data.text_out
+                .split("</p>").join("")
+                .split("<p>")
+                .slice(1, -1);
+            if(hasLoaded) {
+                loadContent();
+            } else {
+                //Wait for the other one and allow it to load the content.
+                hasLoaded = true;
+            }
+        });
+        
+        function loadContent() {
+            console.log(availableHeadings);
+            console.log(availableBodies);
+            
+            var header;
+            var content;
+            //Append Blocks
+            for (var i = 0; i < 10; i++) {
+                for (var y = 0; y < parseInt(Math.random()*(iterationCount-1)); y++) {
+                    header = availableHeadings[y];
+                    content = availableBodies[y];
+                    returnBlock($(".insertText-block1"), false,
+                                header, content,
+                                i, y);
+                }
+                returnBlock($(".insertText-block1"), true,
+                            availableHeadings[0], availableBodies[0],
+                            i, y);
+            }
+        }
+    </script>
+</body>
+</html>
