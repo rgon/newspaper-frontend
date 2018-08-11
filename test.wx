@@ -1,0 +1,656 @@
+// { "framework": "Vue" }
+"use weex:vue";
+
+/******/
+(function(modules) { // webpackBootstrap
+    /******/ // The module cache
+    /******/
+    var installedModules = {};
+    /******/
+    /******/ // The require function
+    /******/
+    function __webpack_require__(moduleId) {
+        /******/
+        /******/ // Check if module is in cache
+        /******/
+        if (installedModules[moduleId]) {
+            /******/
+            return installedModules[moduleId].exports;
+            /******/
+        }
+        /******/ // Create a new module (and put it into the cache)
+        /******/
+        var module = installedModules[moduleId] = {
+            /******/
+            i: moduleId,
+            /******/
+            l: false,
+            /******/
+            exports: {}
+            /******/
+        };
+        /******/
+        /******/ // Execute the module function
+        /******/
+        modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+        /******/
+        /******/ // Flag the module as loaded
+        /******/
+        module.l = true;
+        /******/
+        /******/ // Return the exports of the module
+        /******/
+        return module.exports;
+        /******/
+    }
+    /******/
+    /******/
+    /******/ // expose the modules object (__webpack_modules__)
+    /******/
+    __webpack_require__.m = modules;
+    /******/
+    /******/ // expose the module cache
+    /******/
+    __webpack_require__.c = installedModules;
+    /******/
+    /******/ // define getter function for harmony exports
+    /******/
+    __webpack_require__.d = function(exports, name, getter) {
+        /******/
+        if (!__webpack_require__.o(exports, name)) {
+            /******/
+            Object.defineProperty(exports, name, {
+                /******/
+                configurable: false,
+                /******/
+                enumerable: true,
+                /******/
+                get: getter
+                    /******/
+            });
+            /******/
+        }
+        /******/
+    };
+    /******/
+    /******/ // getDefaultExport function for compatibility with non-harmony modules
+    /******/
+    __webpack_require__.n = function(module) {
+        /******/
+        var getter = module && module.__esModule ?
+            /******/
+            function getDefault() {
+                return module['default'];
+            } :
+            /******/
+            function getModuleExports() {
+                return module;
+            };
+        /******/
+        __webpack_require__.d(getter, 'a', getter);
+        /******/
+        return getter;
+        /******/
+    };
+    /******/
+    /******/ // Object.prototype.hasOwnProperty.call
+    /******/
+    __webpack_require__.o = function(object, property) {
+        return Object.prototype.hasOwnProperty.call(object, property);
+    };
+    /******/
+    /******/ // __webpack_public_path__
+    /******/
+    __webpack_require__.p = "";
+    /******/
+    /******/ // Load entry module and return exports
+    /******/
+    return __webpack_require__(__webpack_require__.s = 0);
+    /******/
+})
+/************************************************************************/
+/******/
+([
+    /* 0 */
+    /***/
+    (function(module, exports, __webpack_require__) {
+
+        "use strict";
+
+
+        var _App = __webpack_require__(1);
+
+        var _App2 = _interopRequireDefault(_App);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        _App2.default.el = '#root';
+        new Vue(_App2.default);
+
+        /***/
+    }),
+    /* 1 */
+    /***/
+    (function(module, exports, __webpack_require__) {
+
+        var __vue_exports__, __vue_options__
+        var __vue_styles__ = []
+
+        /* styles */
+        __vue_styles__.push(__webpack_require__(2))
+
+        /* script */
+        __vue_exports__ = __webpack_require__(3)
+
+        /* template */
+        var __vue_template__ = __webpack_require__(4)
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {}
+        if (
+            typeof __vue_exports__.default === "object" ||
+            typeof __vue_exports__.default === "function"
+        ) {
+            if (Object.keys(__vue_exports__).some(function(key) {
+                    return key !== "default" && key !== "__esModule"
+                })) {
+                console.error("named exports are not supported in *.vue files.")
+            }
+            __vue_options__ = __vue_exports__ = __vue_exports__.default
+        }
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options
+        }
+        __vue_options__.__file = "/usr/src/app/raw/9b01be399364ba505e7ccf8e6e7b80c9/App.vue"
+        __vue_options__.render = __vue_template__.render
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+        __vue_options__._scopeId = "data-v-ad2e1100"
+        __vue_options__.style = __vue_options__.style || {}
+        __vue_styles__.forEach(function(module) {
+            for (var name in module) {
+                __vue_options__.style[name] = module[name]
+            }
+        })
+        if (typeof __register_static_styles__ === "function") {
+            __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+        }
+
+        module.exports = __vue_exports__
+
+
+        /***/
+    }),
+    /* 2 */
+    /***/
+    (function(module, exports) {
+
+        module.exports = {
+            "header": {
+                "fontSize": "80",
+                "color": "#FF0000",
+                "fontFamily": "serif"
+            },
+            "textbackground": {
+                "position": "absolute",
+                "bottom": 0,
+                "left": 0,
+                "right": 0,
+                "backgroundColor": "#FFFFFF"
+            },
+            "scroller": {
+                "position": "absolute",
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            },
+            "entries": {
+                "marginTop": "25",
+                "display": "flex",
+                "left": 0,
+                "right": 0,
+                "flexDirection": "column",
+                "justifyContent": "center"
+            },
+            "entry": {
+                "display": "flex",
+                "left": 0,
+                "right": 0,
+                "flexDirection": "row",
+                "justifyContent": "space-between"
+            },
+            "center": {
+                "display": "flex",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "left": 0,
+                "right": 0
+            },
+            "eventContainer": {
+                "display": "flex",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "zIndex": 10
+            },
+            "backgroundimage": {
+                "position": "absolute",
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "height": "500",
+                "zIndex": -1
+            },
+            "backgroundimagespacer": {
+                "position": "relative",
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "height": "500",
+                "zIndex": 1
+            },
+            "backgroundgradient": {
+                "position": "absolute",
+                "left": 0,
+                "right": 0,
+                "top": 0,
+                "backgroundImage": "linear-gradient(to top, black, transparent)"
+            },
+            "imageframeContainer": {
+                "backgroundColor": "#FF0000"
+            },
+            "imageframe": {
+                "borderColor": "#808080",
+                "borderWidth": "20",
+                "boxSizing": "border-box",
+                "boxShadow": "20px 10px 5px rgb(69, 69, 69)",
+                "backgroundRepeat": "no-repeat",
+                "backgroundColor": "#FFFFFF",
+                "zIndex": 3
+            },
+            "title": {
+                "fontSize": "60",
+                "textAlign": "left",
+                "marginTop": "25",
+                "marginRight": 0,
+                "marginBottom": "25",
+                "marginLeft": 0
+            }
+        }
+
+        /***/
+    }),
+    /* 3 */
+    /***/
+    (function(module, exports, __webpack_require__) {
+
+        "use strict";
+
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+
+
+        exports.default = {
+            methods: {
+                // Analyzes the webview title to see if it contains an auth token. If it does, then notify the user that they've been authenticated.
+                onError: function onError(value) {
+                    // this.error = value
+                    console.log('onError', value);
+                    this.error = value.name + ' | ' + value.message;
+                }
+            },
+            data: function data() {
+                return {
+                    windowSize: 500,
+                    imageWidth: 300,
+                    themeColor: '#191C16',
+                    // themeColor: '#F3ECE6',
+                    // textColor: 'black',
+                    textColor: '#fdfdfd',
+                    // themeBGimage: 'http://playapadre.com/images/FONDO.jpg',
+                    themeBGimage: 'http://emsaustralia.net/wp-content/uploads/2015/01/slate-background.jpg',
+                    imageHeight: 200, // Will be automatically set according to the set aspect ratio
+
+                    imageList: [
+                        // { src: 'http://192.168.1.132:8082/static/assets/Momento' },
+                        {
+                            src: 'http://via.placeholder.com/' + this.deviceWidth + 'x' + this.deviceHeight
+                        }, {
+                            src: 'http://via.placeholder.com/' + this.deviceWidth + 'x' + this.deviceHeight + '/aaa'
+                        }, {
+                            src: 'http://via.placeholder.com/' + this.deviceWidth + 'x' + this.deviceHeight + '/222'
+                        }
+                    ],
+                    deviceWidth: undefined,
+                    deviceHeight: undefined,
+
+                    // Doin' it
+                    title: 'none',
+                    // loginUrl: 'https://vuejs.org'
+                    eventJsonUrl: 'http://raw.githubusercontent.com/bahamas10/css-color-names/a179883c822d62eb84d6114be1a3a5044ad3d781/package.json',
+                    getResult: undefined,
+                    error: false,
+
+                    testResult: {
+                        title: 'Test Event 123456',
+                        img: 'https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/31944534_1366610380106249_5676148483980001280_n.jpg?_nc_cat=0&oh=8452bc923a428324359a5114c4ac7dd3&oe=5B9C5946',
+                        // bgimg: 'https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/32478047_1372380399529247_917350897837670400_o.jpg?_nc_cat=0&oh=f3372032cf1e2fb7a8ac1eec4054de78&oe=5B8762D2',
+                        bgimg: 'https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/33339760_1381416235292330_2068439026934743040_o.jpg?_nc_cat=0&oh=0b4a2a463a2978d19fbb761337f6525a&oe=5B7EDE14',
+                        data: [{
+                                type: 'entry',
+                                // class: "{'header': true}",
+
+                                // style: '{display: \'block\'}',
+                                title: 'Test Event 123456'
+                            }, {
+                                type: 'entry',
+                                content: 'Test Description'
+                            }, {
+                                type: 'image',
+                                style: "{height: '100px', width: '300px'}",
+                                imageSrc: 'https://res.cloudinary.com/demo/video/upload/h_200,w_500,fl_waveform,co_black,b_white/bumblebee.png',
+                                imageResize: 'cover'
+                            }, {
+                                type: 'multiple',
+                                style: '{display: \'block\'}',
+                                items: [{
+                                        type: 'entry',
+                                        style: '{display: \'block\'}',
+                                        content: 'content'
+                                    }, {
+                                        type: 'image',
+                                        style: '{height: \'100px\', width: \'600px\'}',
+                                        imageSrc: 'https://res.cloudinary.com/demo/video/upload/h_200,w_500,fl_waveform,co_black,b_white/bumblebee.png',
+                                        imageResize: 'cover'
+                                    }] // items
+                                    // entry
+                            }] // data
+
+                        // Nothing here
+                    }
+                };
+            },
+
+            watch: {
+                weex: function weex(value) {
+                    console.log('NEW weex.config.env value', value.config.env);
+                    this.deviceHeight = value.config.env.deviceHeight;
+                    this.deviceWidth = value.config.env.deviceWidth;
+                }
+            },
+            mounted: function mounted() {
+                // this.imageHeight = this.imageWidth * 4 / 3
+                console.log(this.imageHeight);
+                this.imageHeight = this.imageWidth * 3 / 2;
+                this.deviceHeight = parseInt(weex.config.env.deviceHeight * 0.665);
+                this.deviceWidth = parseInt(weex.config.env.deviceWidth * 0.7);
+
+                // DEBUG: only for the demo
+                this.imageList = [
+                    // { src: 'http://192.168.1.132:8082/static/assets/Momento' },
+                    {
+                        id: 1,
+                        src: 'http://via.placeholder.com/' + this.deviceWidth + 'x' + this.deviceHeight
+                    }, {
+                        id: 2,
+                        src: 'http://via.placeholder.com/' + this.deviceWidth + 'x' + this.deviceHeight + '/aaa'
+                    }, {
+                        id: 3,
+                        src: 'http://via.placeholder.com/' + this.deviceWidth + 'x' + this.deviceHeight + '/222'
+                    }
+                ];
+                // this.weexStuff = JSON.stringify(weex.config.env)
+            }
+        };
+
+        /***/
+    }),
+    /* 4 */
+    /***/
+    (function(module, exports) {
+
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c('div', [_c('div', {
+                    staticClass: ["backgroundimage"],
+                    style: {
+                        backgroundColor: _vm.themeColor
+                    },
+                    attrs: {
+                        "resize": "cover"
+                    }
+                }), _c('image', {
+                    staticClass: ["backgroundimage"],
+                    style: {
+                        height: _vm.windowSize + 'px',
+                        opacity: .5
+                    },
+                    attrs: {
+                        "src": _vm.testResult.bgimg,
+                        "resize": "cover"
+                    }
+                }), _c('scroller', {
+                    staticClass: ["scroller"]
+                }, [_c('div', {
+                    staticClass: ["backgroundgradient"],
+                    style: {
+                        height: parseInt(_vm.windowSize / 2) + 'px',
+                        top: parseInt(_vm.windowSize / 2) + 'px',
+                        backgroundImage: 'linear-gradient(to top, ' + _vm.themeColor + ', transparent)'
+                    }
+                }), _c('div', {
+                    staticClass: ["eventContainer"]
+                }, [_c('image', {
+                    staticClass: ["textbackground"],
+                    style: {
+                        top: _vm.windowSize + 'px',
+                        backgroundColor: _vm.themeColor
+                    },
+                    attrs: {
+                        "src": _vm.themeBGimage,
+                        "resize": "cover"
+                    }
+                }), _c('div', {
+                    staticClass: ["backgroundgradient"],
+                    style: {
+                        height: parseInt(_vm.windowSize / 2) + 'px',
+                        top: parseInt(_vm.windowSize) + 'px',
+                        backgroundImage: 'linear-gradient(to top, transparent, ' + _vm.themeColor + ')'
+                    }
+                }), _c('image', {
+                    staticClass: ["imageframe"],
+                    style: {
+                        height: _vm.imageHeight + 'px',
+                        width: _vm.imageWidth + 'px',
+                        marginTop: _vm.windowSize / 2 + 'px'
+                    },
+                    attrs: {
+                        "resize": "cover",
+                        "src": _vm.testResult.img
+                    }
+                }), _c('div', {
+                    staticClass: ["entries"]
+                }, _vm._l((_vm.testResult.data), function(entry, entryKey) {
+                    return _c('div', {
+                        key: entryKey,
+                        staticClass: ["entry"]
+                    }, [(entry.type === 'entry') ? _c('div', {
+                        class: entry.class,
+                        style: entry.style
+                    }, [(entry.title) ? _c('text', {
+                        staticClass: ["title"],
+                        style: {
+                            color: _vm.textColor + ''
+                        }
+                    }, [_vm._v(_vm._s(entry.title))]) : _vm._e(), (entry.content) ? _c('text', {
+                        staticClass: ["content"],
+                        style: {
+                            color: _vm.textColor + ''
+                        }
+                    }, [_vm._v(_vm._s(entry.content))]) : _vm._e()]) : _vm._e(), (entry.type === 'image') ? _c('image', {
+                        class: entry.class,
+                        style: {
+                            height: '100px',
+                            width: '300px'
+                        },
+                        attrs: {
+                            "resize": entry.imageResize,
+                            "src": entry.imageSrc
+                        }
+                    }) : _vm._e(), _vm._l((entry.items), function(item, itemKey) {
+                        return (entry.type === 'multiple') ? _c('div', {
+                            key: itemKey
+                        }, [(item.type === 'entry') ? _c('div', {
+                            class: entry.class,
+                            style: entry.style
+                        }, [(item.content) ? _c('text', {
+                            staticClass: ["content"],
+                            style: {
+                                color: _vm.textColor + ''
+                            }
+                        }, [_vm._v(_vm._s(item.content))]) : _vm._e()]) : _vm._e(), (item.type === 'image') ? _c('image', {
+                            class: item.class,
+                            style: {
+                                height: '100px',
+                                width: '300px'
+                            },
+                            attrs: {
+                                "resize": item.imageResize,
+                                "src": item.imageSrc
+                            }
+                        }) : _vm._e()]) : _vm._e()
+                    })], 2)
+                })), _vm._l((50), function(number) {
+                    return _c('text', {
+                        key: 'a' + number,
+                        style: {
+                            color: _vm.textColor + ''
+                        }
+                    }, [_vm._v("Filler " + _vm._s(number))])
+                }), _c('text', {
+                    style: {
+                        color: _vm.textColor + ''
+                    }
+                }, [_vm._v("Filler " + _vm._s(_vm.number))]), _vm._l((50), function(number) {
+                    return _c('text', {
+                        key: 'c' + number,
+                        style: {
+                            color: _vm.textColor + ''
+                        }
+                    }, [_vm._v("Filler " + _vm._s(number))])
+                })], 2)])])
+            },
+            staticRenderFns: []
+        }
+        module.exports.render._withStripped = true
+
+        /***/
+    })
+    /******/
+]);
